@@ -1,6 +1,5 @@
 from PIL import Image
 from numpy import array
-import matplotlib.pyplot as plt
 
 img = Image.open("../images/imagem-teste.jpg")
 
@@ -11,6 +10,8 @@ def grayScale(img):
             t = sum(a[i][j]) // 3
             a[i][j] = [t, t, t]
     return Image.fromarray(a)
+
+
 
 
 x = grayScale(img)
