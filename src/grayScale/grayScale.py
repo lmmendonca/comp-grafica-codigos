@@ -3,6 +3,7 @@ from numpy import array
 
 img = Image.open("../images/imagem-teste.jpg")
 
+
 def grayScale(img):
     a = array(img)
     for i in range(len(a)):
@@ -12,9 +13,7 @@ def grayScale(img):
     return Image.fromarray(a)
 
 
-
-
+Image.fromarray()
 x = grayScale(img)
 
 x.show()
-

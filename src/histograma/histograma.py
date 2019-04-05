@@ -1,11 +1,9 @@
-import matplotlib.pyplot as plt
-from PIL import Image
-import numpy as np
 import cv2
+import matplotlib.pyplot as plt
+import numpy as np
 
 
-
-#img = Image.open("../images/imagem-teste.jpg")
+# img = Image.open("../images/imagem-teste.jpg")
 
 
 def geraHistograma(img):
@@ -14,11 +12,16 @@ def geraHistograma(img):
     _ = plt.ylabel('NUMERO DE REPETIÇOES')
     plt.show()
 
-img = cv2.imread("../images/imagem-teste.jpg")
 
-color = ('b','g','r')
-for i,col in enumerate(color):
-    histr = cv2.calcHist([img],[i],None,[256],[0,256])
-    plt.plot(histr, color=col)
-    plt.xlim([0, 256])
-plt.show()
+def geraHistogramaSeparado(path):
+    img = cv2.imread(path)
+    print(img)
+    color = ('b', 'g', 'r')
+    for i, col in enumerate(color):
+        histr = cv2.calcHist([img], [i], None, [256], [0, 256])
+        plt.plot(histr, color=col)
+        plt.xlim([0, 256])
+    plt.show()
+
+
+geraHistogramaSeparado("../images/imagem-teste.jpg")

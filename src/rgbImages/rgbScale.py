@@ -1,8 +1,6 @@
 from PIL import Image
+from matplotlib import pyplot as plt
 from numpy import array
-import matplotlib.pyplot as plt
-
-img = Image.open("../images/imagem-teste.jpg")
 
 
 def rgbScale(img):
@@ -17,8 +15,71 @@ def rgbScale(img):
     return (Image.fromarray(r), Image.fromarray(g), Image.fromarray(b))
 
 
-a, b, c = rgbScale(img)
+# Tarefa 1
 
-a.show()
-b.show()
-c.show()
+def subplotImagens(path):
+    img = Image.open(path)
+    a, b, c = rgbScale(img)
+
+    plt.subplot(231)
+    plt.imshow(img)
+    plt.subplot(232)
+    plt.imshow(a)
+    plt.subplot(234)
+    plt.imshow(b)
+    plt.subplot(235)
+    plt.imshow(c)
+
+
+# Tarefa 2
+
+def grayScale(img):
+    a = array(img)
+    for i in range(len(a)):
+        for j in range(len(a[i])):
+            t = sum(a[i][j]) // 3
+            a[i][j] = [t, t, t]
+    return Image.fromarray(a)
+
+
+def pretoBranco(img):
+    a = array(img)
+    for i in range(len(a)):
+        for j in range(len(a[i])):
+            t = sum(a[i][j]) // 3
+            if t > 127:
+                a[i][j] = [255, 255, 255]
+            else:
+                a[i][j] = [0, 0, 0]
+    return Image.fromarray(a)
+
+
+def pretoBrancoPelaMediaMatriz(img):
+    a = array(img)
+    media = a.mean()
+    for i in range(len(a)):
+        for j in range(len(a[i])):
+            t = sum(a[i][j]) // 3
+            if media > t:
+                a[i][j] = [255, 255, 255]
+            else:
+                a[i][j] = [0, 0, 0]
+    return Image.fromarray(a)
+
+
+def subplotGrayScale(path):
+    img = Image.open(path)
+
+    a = grayScale(img)
+    b = pretoBranco(a)
+    c = pretoBrancoPelaMediaMatriz(a)
+
+    plt.subplot(231)
+    plt.imshow(a)
+    plt.subplot(232)
+    plt.imshow(b)
+    plt.subplot(233)
+    plt.imshow(c)
+
+
+subplotGrayScale("../images/imagem-teste.jpg")
